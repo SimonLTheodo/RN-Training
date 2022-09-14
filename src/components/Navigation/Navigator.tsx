@@ -5,7 +5,8 @@ import Details from "../Pokedex/Details";
 type RootStackParamList = {
     Pokedex: undefined,
     Details: {
-        title: string
+        title: string,
+        url: string
     }
 }
 const Stack = createNativeStackNavigator<RootStackParamList>();

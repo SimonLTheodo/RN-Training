@@ -20,7 +20,8 @@ export default function Pokedex({navigation} : {navigation:any}) {
     }, []);
     const Item = ({item} : {item:any}) => (
         <TouchableHighlight underlayColor={"#222222"} style={styles.item} onPress={() => navigation.navigate("Details", {
-            title: item.name.charAt(0).toUpperCase() + item.name.slice(1)
+            title: item.name.charAt(0).toUpperCase() + item.name.slice(1),
+            url: item.url
         })}>
             <Text style={styles.title}>
                 {item.name}
