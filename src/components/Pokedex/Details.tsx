@@ -3,11 +3,11 @@ import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native
 const pokemonList = require("../../../assets/kanto.json")
 
 export default function Details({route, navigation} : {route:any, navigation:any}) {
-    const {item} = route.params
+    const {title, url} = route.params
   return (
     <View style={styles.container}>
         <Text>
-            {item.name}
+            {title}
         </Text>
     </View>
   );
