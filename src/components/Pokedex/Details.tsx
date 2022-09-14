@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { AppStateContext } from '../Context/AppStateProvider';
 const pokemonList = require("../../../assets/kanto.json")
 
 export default function Details({route, navigation} : {route:any, navigation:any}) {
@@ -8,6 +9,7 @@ export default function Details({route, navigation} : {route:any, navigation:any
     const [isLoading, setLoading] = useState(true);
     const [backSprite, setBackSprite] = useState(false)
     const [data, setData] = useState<any>([]);
+    const {test} = useContext(AppStateContext);
     const Stat = ({statName, statValue} : {statName : string, statValue : any}) => {
         return (
             <View style={styles.statContainer}>
