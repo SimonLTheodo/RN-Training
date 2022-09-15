@@ -1,8 +1,9 @@
-import { createContext, ReactNode } from "react";
+import { createContext, ReactNode, useState } from "react";
 
 export const AppThemes = {
   light: {
     primary: "crimson",
+    switch: "#d35b73",
     secondary: "#F5F5F5",
     background: "#FFF",
     headingText: "#FFFFFF",
@@ -12,6 +13,7 @@ export const AppThemes = {
   },
   dark: {
     primary: "#bd1134",
+    switch: "#d35b73",
     secondary: "#454545",
     background: "#252525",
     headingText: "#FFFFFF",
@@ -21,15 +23,24 @@ export const AppThemes = {
   },
 };
 
-const defaultContext = {
+let defaultContext = {
   colours: AppThemes.light,
+  setColours: (val: boolean) => {},
 };
-
 export const AppStateContext = createContext(defaultContext);
 
-// export const AppStateProvider = () => (
-export const AppStateProvider = ({ children }: { children: ReactNode }) => (
-  <AppStateContext.Provider value={defaultContext}>
-    {children}
-  </AppStateContext.Provider>
-);
+export const AppStateProvider = ({ children }: { children: ReactNode }) => {
+  const [theme, setTheme] = useState(AppThemes.light);
+  return (
+    <AppStateContext.Provider
+      value={{
+        colours: theme,
+        setColours: (val) => {
+          val ? setTheme(AppThemes.light) : setTheme(AppThemes.dark);
+        },
+      }}
+    >
+      {children}
+    </AppStateContext.Provider>
+  );
+};
