@@ -1,3 +1,4 @@
+import { useIsFocused } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect, useContext } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
@@ -9,6 +10,7 @@ export default function Details({route, navigation} : {route:any, navigation:any
     const [isLoading, setLoading] = useState(true);
     const [backSprite, setBackSprite] = useState(false)
     const [data, setData] = useState<any>([]);
+    const isFocused = useIsFocused();
     const {test} = useContext(AppStateContext);
     const Stat = ({statName, statValue} : {statName : string, statValue : any}) => {
         return (
@@ -24,6 +26,7 @@ export default function Details({route, navigation} : {route:any, navigation:any
     }
     const getPokemonData = async () => {
         try {
+            setLoading(true)
             const response = await fetch(url);
             const json = await response.json();
             setData(json);
@@ -34,8 +37,10 @@ export default function Details({route, navigation} : {route:any, navigation:any
         }
     }
     useEffect(() => {
+      if (isFocused) {
         getPokemonData();
-    }, []);
+      }
+    }, [isFocused]);
     return (
         <View style={styles.container}>
             {isLoading ? null : (
