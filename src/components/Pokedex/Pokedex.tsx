@@ -38,8 +38,11 @@ export default function Pokedex({ navigation }: { navigation: any }) {
       const response = await fetch(
         "https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0"
       );
+      console.log(response);
       const json = await response.json();
+      console.log(json);
       setData(json.results);
+      console.log(data);
     } catch (error) {
       console.error(error);
     }
